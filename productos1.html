@@ -45,7 +45,7 @@
   </div>
 
   <script>
-
+    // Base de datos de productos
     const productos = [
       {
         id: "1",
@@ -76,7 +76,8 @@
         precio: 18500
       }
     ];
-    
+
+    // Obtener el ID de la URL
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
     const producto = productos.find(p => p.id === id);
@@ -95,6 +96,7 @@
       contenedor.innerHTML = "<p>Producto no encontrado</p>";
     }
 
+    // Función para agregar al carrito (compatible con index.html)
     function agregarAlCarrito(nombre, precio) {
       if (typeof carrito === 'undefined') {
         carrito = [];
@@ -102,6 +104,12 @@
       carrito.push({ nombre, precio });
       alert(`${nombre} agregado al carrito!`);
       
+      // Opcional: Guardar en localStorage para persistencia
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+    }
+  </script>
+</body>
+</html>
       localStorage.setItem('carrito', JSON.stringify(carrito));
     }
   </script>
