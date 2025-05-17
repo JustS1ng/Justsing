@@ -1,27 +1,40 @@
-pdcto1.html
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Producto</title>
+  <title>Detalle del Producto | JustSing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Comfortaa', sans-serif;
+      background-color: #CADFE4;
       padding: 2rem;
+      text-align: center;
     }
     .producto {
       max-width: 400px;
-      border: 1px solid #ccc;
-      padding: 1rem;
-      border-radius: 8px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     .producto img {
       width: 100%;
-      height: auto;
+      border-radius: 8px;
     }
     .producto h2 {
+      color: #890620;
+      margin-top: 1rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      background-color: #890620;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
       margin-top: 1rem;
     }
   </style>
@@ -32,37 +45,40 @@ pdcto1.html
   </div>
 
   <script>
-    // Simulamos productos en una lista
+
     const productos = [
       {
         id: "1",
         nombre: "Bolsa 13",
         descripcion: "Medidas: 28x33cm",
-        imagen: "https://i.postimg.cc/0j1s3YbN/IMG-9261.jpg"
+        imagen: "https://i.postimg.cc/yYYZrc9j/IMG-9279.jpg",
+        precio: 13000
       },
       {
         id: "2",
         nombre: "Bolsa Florero",
         descripcion: "Medidas: 50x46cm",
-        imagen: "https://i.postimg.cc/rmCnVxfs/IMG-9265.jpg"
+        imagen: "https://i.postimg.cc/66cjFV71/IMG-9268.jpg",
+        precio: 25000
       },
       {
         id: "3",
         nombre: "Bolsa Mujer",
         descripcion: "Medidas: 25x29cm",
-        imagen: "https://i.postimg.cc/VkrKS3K3/IMG-9274.jpg"
+        imagen: "https://i.postimg.cc/VkrKS3K3/IMG-9274.jpg",
+        precio: 16500
       },
+      {
         id: "4",
         nombre: "Bolsa Lavanda",
         descripcion: "Medidas: 33x34cm",
-        imagen: "https://i.postimg.cc/1tHBhPzN/IMG-9275.jpg"
+        imagen: "https://i.postimg.cc/qR0w5gpT/IMG-9276.jpg",
+        precio: 18500
       }
     ];
- 
-    // Obtener el ID de la URL
+    
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
-
     const producto = productos.find(p => p.id === id);
     const contenedor = document.getElementById("producto");
 
@@ -71,9 +87,22 @@ pdcto1.html
         <img src="${producto.imagen}" alt="${producto.nombre}">
         <h2>${producto.nombre}</h2>
         <p>${producto.descripcion}</p>
+        <p><strong>Precio: $${producto.precio}</strong></p>
+        <button onclick="agregarAlCarrito('${producto.nombre}', ${producto.precio})">Agregar al carrito</button>
+        <a href="index.html"><button>Volver a la tienda</button></a>
       `;
     } else {
       contenedor.innerHTML = "<p>Producto no encontrado</p>";
+    }
+
+    function agregarAlCarrito(nombre, precio) {
+      if (typeof carrito === 'undefined') {
+        carrito = [];
+      }
+      carrito.push({ nombre, precio });
+      alert(`${nombre} agregado al carrito!`);
+      
+      localStorage.setItem('carrito', JSON.stringify(carrito));
     }
   </script>
 </body>
