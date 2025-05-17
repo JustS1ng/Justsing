@@ -12,35 +12,54 @@
       padding: 2rem;
       text-align: center;
     }
-    .producto {
-      max-width: 400px;
-      margin: 0 auto;
+    .producto-detalle {
+      max-width: 500px;
+      margin: 2rem auto;
       background: white;
       border-radius: 10px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 2rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-    .producto img {
+    .producto-detalle img {
       width: 100%;
+      max-height: 400px;
+      object-fit: contain;
       border-radius: 8px;
+      margin-bottom: 1rem;
     }
-    .producto h2 {
+    .producto-detalle h2 {
       color: #890620;
-      margin-top: 1rem;
+      margin: 1rem 0;
+    }
+    .producto-detalle p {
+      margin: 0.5rem 0;
+    }
+    .botones {
+      margin-top: 1.5rem;
     }
     button {
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1.2rem;
       background-color: #890620;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      margin-top: 1rem;
+      margin: 0 0.5rem;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #6d0420;
+    }
+    .volver {
+      display: inline-block;
+      margin-top: 1.5rem;
+      color: #890620;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-  <div class="producto" id="producto">
+  <div class="producto-detalle" id="producto">
     Cargando producto...
   </div>
 
@@ -51,37 +70,43 @@
         id: "1",
         nombre: "Bolsa 13",
         descripcion: "Medidas: 28x33cm",
-        imagen: "https://i.postimg.cc/yYYZrc9j/IMG-9279.jpg",
-        precio: 13000
+        precio: 13000,
+        imagen: "https://i.postimg.cc/yYYZrc9j/IMG-9279.jpg"
       },
       {
         id: "2",
         nombre: "Bolsa Florero",
         descripcion: "Medidas: 50x46cm",
-        imagen: "https://i.postimg.cc/66cjFV71/IMG-9268.jpg",
-        precio: 25000
+        precio: 25000,
+        imagen: "https://i.postimg.cc/66cjFV71/IMG-9268.jpg"
       },
       {
         id: "3",
         nombre: "Bolsa Mujer",
         descripcion: "Medidas: 25x29cm",
-        imagen: "https://i.postimg.cc/VkrKS3K3/IMG-9274.jpg",
-        precio: 16500
+        precio: 16500,
+        imagen: "https://i.postimg.cc/VkrKS3K3/IMG-9274.jpg"
       },
       {
         id: "4",
         nombre: "Bolsa Lavanda",
         descripcion: "Medidas: 33x34cm",
-        imagen: "https://i.postimg.cc/qR0w5gpT/IMG-9276.jpg",
-        precio: 18500
+        precio: 18500,
+        imagen: "https://i.postimg.cc/qR0w5gpT/IMG-9276.jpg"
       }
     ];
 
-    // Obtener el ID de la URL
+    // Obtener ID de la URL
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
     const producto = productos.find(p => p.id === id);
     const contenedor = document.getElementById("producto");
+
+    // Cargar carrito desde localStorage
+    let carrito = [];
+    if (localStorage.getItem('carrito')) {
+      carrito = JSON.parse(localStorage.getItem('carrito'));
+    }
 
     if (producto) {
       contenedor.innerHTML = `
@@ -89,28 +114,22 @@
         <h2>${producto.nombre}</h2>
         <p>${producto.descripcion}</p>
         <p><strong>Precio: $${producto.precio}</strong></p>
-        <button onclick="agregarAlCarrito('${producto.nombre}', ${producto.precio})">Agregar al carrito</button>
-        <a href="index.html"><button>Volver a la tienda</button></a>
+        <div class="botones">
+          <button onclick="agregarAlCarrito('${producto.nombre}', ${producto.precio})">Agregar al carrito</button>
+          <a href="index.html"><button>Volver a la tienda</button></a>
+        </div>
       `;
     } else {
-      contenedor.innerHTML = "<p>Producto no encontrado</p>";
+      contenedor.innerHTML = `
+        <h2>Producto no encontrado</h2>
+        <a href="index.html" class="volver">← Volver a la tienda</a>
+      `;
     }
 
-    // Función para agregar al carrito (compatible con index.html)
     function agregarAlCarrito(nombre, precio) {
-      if (typeof carrito === 'undefined') {
-        carrito = [];
-      }
       carrito.push({ nombre, precio });
+      localStorage.setItem('carrito', JSON.stringify(carrito));
       alert(`${nombre} agregado al carrito!`);
-      
-      // Opcional: Guardar en localStorage para persistencia
-      localStorage.setItem('carrito', JSON.stringify(carrito));
-    }
-  </script>
-</body>
-</html>
-      localStorage.setItem('carrito', JSON.stringify(carrito));
     }
   </script>
 </body>
