@@ -168,6 +168,13 @@
     <p>JustSing © 2025 — Gracias por visitar nuestra tienda 💕</p>
   </footer>
 
+  <div id="carrito" class="carrito">
+    <h2>Carrito</h2>
+    <ul id="lista-carrito"></ul>
+    <p id="total">Total: $0</p>
+    <p id="total-final">Total con envío: $0</p>
+  </div>
+
   <script>
     let carrito = [];
     const envio = 2000;
@@ -202,13 +209,6 @@
       document.getElementById('total').textContent = `Total: $${total}`;
       document.getElementById('total-final').textContent = `Total con envío: $${total + envio}`;
     }
-    <div id="carrito" class="carrito">
-  <h2>Carrito</h2>
-  <ul id="lista-carrito"></ul>
-  <p id="total">Total: $0</p>
-  <p id="total-final">Total con envío: $0</p>
-</div>
-    
   </script>
 </body>
 </html>
