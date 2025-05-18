@@ -62,7 +62,33 @@
   <div class="producto-detalle" id="producto">
     Cargando producto...
   </div>
-
+<style>
+    /* Añadir botón de volver */
+    .btn-volver {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #890620;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    
+    /* Galería de imágenes */
+    .galeria {
+      display: flex;
+      gap: 10px;
+      margin: 15px 0;
+    }
+    
+    .galeria img {
+      width: 48%;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
   <script>
     // Base de datos de productos
     const productos = [
@@ -94,8 +120,35 @@
         precio: 18500,
         imagen: "https://i.postimg.cc/qR0w5gpT/IMG-9276.jpg"
       }
+      // Base de datos de productos (ejemplo)
+const productos = {
+  totebags: [
+    {
+      id: "5",
+      nombre: "Tote Bag Básica",
+      precio: 15000,
+      imagenes: ["img/tote1-1.jpg", "img/tote1-2.jpg"]
+    },
+    // ... agregar más productos aquí
+  ],
+  cartucheras: [
+    {
+      id: "c1",
+      nombre: "Cartuchera Minimal",
+      precio: 8000,
+      imagenes: ["img/cartuchera1-1.jpg", "img/cartuchera1-2.jpg"]
+    },
+    // ... agregar más productos aquí
+  ]
+};
     ];
-
+ <div class="galeria">
+    <img src="imagen1.jpg" alt="Vista adicional 1">
+    <img src="imagen2.jpg" alt="Vista adicional 2">
+  </div>
+  
+  <!-- Botón para volver -->
+  <a href="index.html" class="btn-volver">Volver a la tienda</a>
     // Obtener ID de la URL
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
