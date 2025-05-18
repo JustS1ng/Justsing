@@ -176,6 +176,60 @@
       <p>$18.500</p>
       <button onclick="agregarAlCarrito('Bolsa lavanda', 18500)">Agregar al carrito</button>
     </div>
+    // BASE DE DATOS DE PRODUCTOS (compartida)
+const productos = {
+  totebags: [
+    {
+      id: "5",
+      nombre: "Bolsa ",
+      precio: 13000,
+      descripcion: "Medidas: 28x33cm",
+      imagenes: [
+        "https://i.postimg.cc/yYYZrc9j/IMG-9279.jpg",
+        "https://i.postimg.cc/XXXXXX/otra-imagen.jpg" // Segunda imagen
+      ]
+    },
+    // ... agregar más totebags aquí
+  ],
+  cartucheras: [
+    {
+      id: "c1",
+      nombre: "Cartuchera Minimal",
+      precio: 8000,
+      descripcion: "Medidas: 18x8cm",
+      imagenes: [
+        "https://i.postimg.cc/XXXXXX/cartuchera1.jpg",
+        "https://i.postimg.cc/XXXXXX/cartuchera2.jpg"
+      ]
+    }
+    // ... agregar más cartucheras aquí
+  ]
+};
+
+// Función para cargar productos en la página principal
+function cargarProductos(categoria) {
+  const contenedor = document.querySelector('.productos');
+  contenedor.innerHTML = '';
+  productos[categoria].forEach(producto => {
+    contenedor.innerHTML += `
+      <div class="producto">
+        <a href="producto.html?id=${producto.id}&categoria=${categoria}">
+          <img src="${producto.imagenes[0]}" alt="${producto.nombre}">
+          <h3>${producto.nombre}</h3>
+        </a>
+        <p>$${producto.precio}</p>
+        <button onclick="agregarAlCarrito('${producto.nombre}', ${producto.precio})">
+          Agregar al carrito
+        </button>
+      </div>
+    `;
+  });
+}
+
+// Al cargar la página, mostrar totebags por defecto
+window.onload = function() {
+  cargarProductos('totebags');
+};
   </section>
 
   <footer>
