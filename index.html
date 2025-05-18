@@ -190,6 +190,33 @@
   </div>
 
   <script>
+     // Control del sidebar
+    document.getElementById('menu-btn').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.toggle('open');
+    });
+
+    // Contenido dinámico para las secciones
+    document.getElementById('btn-totebags').addEventListener('click', function(e) {
+      e.preventDefault();
+      // Aquí iría la lógica para mostrar los totebags
+      alert("Mostrando totebags...");
+    });
+
+    document.getElementById('btn-cartucheras').addEventListener('click', function(e) {
+      e.preventDefault();
+      // Aquí iría la lógica para mostrar cartucheras
+      alert("Mostrando cartucheras...");
+    });
+    document.getElementById('btn-contacto').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('productos').innerHTML = `
+        <div class="contacto-form">
+          <h2>Formulario de contacto</h2>
+          <input type="text" placeholder="Ingresa tu nombre">
+          <input type="email" placeholder="Ingresa tu email (ej: tunombre@gmail.com)">
+          <textarea placeholder="Escribe tu mensaje"></textarea>
+          <button>Enviar</button>
+
     let carrito = [];
     const envio = 2000;
 
