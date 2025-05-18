@@ -255,10 +255,13 @@ window.onload = function() {
       // Aquí iría la lógica para mostrar los totebags
       alert("Mostrando totebags...");
     });
-
-    document.getElementById('btn-cartucheras').addEventListener('click', function(e) {
-      e.preventDefault();
-      // Aquí iría la lógica para mostrar cartucheras
+document.getElementById('btn-cartucheras').addEventListener('click', function(e) {
+  e.preventDefault();
+  document.getElementById('productos').innerHTML = `
+    <div style="background-color: #588157; min-height: 100vh; padding: 20px;">
+      <!-- Contenido de cartucheras aquí -->
+    </div>
+  `;
       alert("Mostrando cartucheras...");
     });
     document.getElementById('btn-contacto').addEventListener('click', function(e) {
