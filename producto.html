@@ -56,6 +56,68 @@
       color: #890620;
       text-decoration: none;
     }
+    .slider-container {
+    position: relative;
+    max-width: 800px; /* Ajusta el ancho */
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slide {
+    min-width: 100%;
+    display: none;
+}
+
+.slide.active {
+    display: block;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 18px;
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.dot.active {
+    background: white;
+}
   </style>
 </head>
 <body>
@@ -73,18 +135,23 @@
       text-decoration: none;
       border-radius: 5px;
     }
+   
+  <!-- Slider de imágenes -->
+<div class="slider-container">
+    <div class="slider">
+        <!-- Imágenes del slider -->
+        <img src="https://i.postimg.cc/yYYZrc9j/IMG-9279.jpg" "https://i.postimg.cc/0j1s3YbN/IMG-9261.jpg" "https://i.postimg.cc/tRdQJVsh/IMG-9262.jpg" alt="id: "1" class="slide active">
+        <img src="https://i.postimg.cc/66cjFV71/IMG-9268.jpg" "https://i.postimg.cc/rmCnVxfs/IMG-9265.jpg" alt="id: "2" class="slide">
+        <img src="imagenes/producto3.jpg" alt="Producto 3" class="slide">
+        <!-- Agrega más imágenes si necesitas -->
+    </div>
+    <!-- Botones de navegación -->
+    <button class="slider-btn prev-btn">&lt;</button>
+    <button class="slider-btn next-btn">&gt;</button>
+    <!-- Puntos indicadores -->
+    <div class="slider-dots"></div>
+</div>
     
-    /* Galería de imágenes */
-    .galeria {
-      display: flex;
-      gap: 10px;
-      margin: 15px 0;
-    }
-    
-    .galeria img {
-      width: 48%;
-      border-radius: 5px;
-      cursor: pointer;
     }
   </style>
 </head>
@@ -216,6 +283,53 @@ id: "c2",
       localStorage.setItem('carrito', JSON.stringify(carrito));
       alert(`${nombre} agregado al carrito!`);
     }
-  </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const dotsContainer = document.querySelector('.slider-dots');
+        let currentIndex = 0;
+
+        // Crear puntos indicadores
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        // Función para cambiar de slide
+        function goToSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            currentIndex = index;
+            slides[currentIndex].classList.add('active');
+            dots[currentIndex].classList.add('active');
+        }
+
+        // Botón "Siguiente"
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            goToSlide(currentIndex);
+        });
+
+        // Botón "Anterior"
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            goToSlide(currentIndex);
+        });
+
+        // Autoplay (opcional)
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            goToSlide(currentIndex);
+        }, 3000); // Cambia cada 3 segundos
+    });
+</script>
 </body>
 </html>
