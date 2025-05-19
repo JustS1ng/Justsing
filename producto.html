@@ -137,14 +137,13 @@
     }
    
   <!-- Slider de imágenes -->
+<!-- Slider de imágenes CORREGIDO -->
 <div class="slider-container">
     <div class="slider">
-        <!-- Imágenes del slider -->
-        <img src="IMG_9279.JPG" "IMG_9261.JPG" "IMG_9262.jpg" alt="id: "1" class="slide active">
-        <img src="IMG_9268.JPG" "IMG_9265.JPG" alt="id: "2" class="slide">
-        <img src="IMG_9274.JPG" "IMG_9273.JPG" alt="id: "3" class="slide">
-        <img src="IMG_9276.JPG" "IMG_9275.JPG" alt="id: "4" class="slide">
-        <!-- Agrega más imágenes si necesitas -->
+        <!-- Imágenes del slider - EJEMPLO para producto ID 1 -->
+        <img src="IMG_9279.JPG" alt="Bolsa 13 - Vista 1" class="slide active">
+        <img src="IMG_9261.JPG" alt="Bolsa 13 - Vista 2" class="slide">
+        <img src="IMG_9262.JPG" alt="Bolsa 13 - Vista 3" class="slide">
     </div>
     <!-- Botones de navegación -->
     <button class="slider-btn prev-btn">&lt;</button>
@@ -242,7 +241,39 @@ id: "c2",
   ]
 };
     ];
- <div class="galeria">
+// Modifica tu script para cargar dinámicamente las imágenes del producto
+if (producto) {
+  let sliderHTML = '<div class="slider-container"><div class="slider">';
+  
+  // Asegúrate que producto.imagenes sea un array
+  const imagenes = Array.isArray(producto.imagenes) ? producto.imagenes : [producto.imagen];
+  
+  imagenes.forEach((img, index) => {
+    sliderHTML += `<img src="${img}" alt="${producto.nombre} - Vista ${index+1}" class="slide ${index === 0 ? 'active' : ''}">`;
+  });
+  
+  sliderHTML += `</div>
+    <button class="slider-btn prev-btn">&lt;</button>
+    <button class="slider-btn next-btn">&gt;</button>
+    <div class="slider-dots"></div>
+  </div>`;
+  
+  contenedor.innerHTML = `
+    ${sliderHTML}
+    <h2>${producto.nombre}</h2>
+    <p>${producto.descripcion}</p>
+    <p><strong>Precio: $${producto.precio}</strong></p>
+    <div class="botones">
+      <button onclick="agregarAlCarrito('${producto.nombre}', ${producto.precio})">Agregar al carrito</button>
+      <a href="index.html"><button>Volver a la tienda</button></a>
+    </div>
+  `;
+  
+  // Inicializa el slider después de cargar las imágenes
+  initSlider();
+}
+    
+    <div class="galeria">
     <img src="imagen1.jpg" alt="Vista adicional 1">
     <img src="imagen2.jpg" alt="Vista adicional 2">
   </div>
