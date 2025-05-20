@@ -189,28 +189,6 @@
     </div>
   </section> 
   ],
-  cartucheras: [
-    {
-      id: "c1",
-      nombre: "Cartuchera Minimal",
-      precio: 8000,
-      descripcion: "Medidas: 18x8cm",
-      imagenes: [
-        "https://i.postimg.cc/XXXXXX/cartuchera1.jpg",
-        "https://i.postimg.cc/XXXXXX/cartuchera2.jpg"
-      ]
-    }
-    // ... agregar más cartucheras aquí
-  ]
-};
-
-     // Función para cargar productos en la página principal
-     function cargarProductos(categoria) {
-    const contenedor = document.querySelector('.productos');
-    contenedor.innerHTML = '';
-    productos[categoria].forEach(producto => {
-    contenedor.innerHTML += `
-    
         <div class="producto">
         <a href="producto.html?id=${producto.id}&categoria=${categoria}">
           <img src="${producto.imagenes[0]}" alt="${producto.nombre}">
@@ -224,11 +202,6 @@
     `;
   });
 }
-
-  // Al cargar la página, mostrar totebags por defecto
-  window.onload = function() {
-  cargarProductos('totebags');
-};
   </section>
 
   <footer>
@@ -277,7 +250,30 @@
       // ... Agrega los demás productos aquí
     ],
     cartucheras: [
-      // ... (opcional)
+     cartucheras: [
+    {
+      id: "c1",
+      nombre: "Cartuchera Minimal",
+      precio: 8000,
+      descripcion: "Medidas: 18x8cm",
+      imagenes: [
+        "https://i.postimg.cc/XXXXXX/cartuchera1.jpg",
+        "https://i.postimg.cc/XXXXXX/cartuchera2.jpg"
+      ]
+    }
+    // ... agregar más cartucheras aquí
+  ]
+};
+    // Al cargar la página, mostrar totebags por defecto
+  window.onload = function() {
+  cargarProductos('totebags');
+
+     // Función para cargar productos en la página principal
+     function cargarProductos(categoria) {
+    const contenedor = document.querySelector('.productos');
+    contenedor.innerHTML = '';
+    productos[categoria].forEach(producto => {
+    contenedor.innerHTML
     ]
   };
 </script>
