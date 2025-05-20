@@ -1,11 +1,68 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>JustSing - Totebags</title>
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>JustSing</title>
   <style>
+       button:hover {
+      background-color: #6d0420;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5em;
+      background-color: #eee;
+      margin-top: 2em;
+    }
+
+    .cart-btn {
+      position: fixed;
+      top: 1.2em;
+      right: 1.2em;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 9999;
+    }
+
+    .cart-btn img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .carrito {
+      display: none;
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 300px;
+      height: 100vh;
+      background-color: #fff6f0;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+      padding: 1em;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .carrito h2 {
+      margin-top: 0;
+      color: #890620;
+    }
+
+    .carrito button {
+      margin-left: 0.5em;
+      background-color: #d94c3a;
+    }
+
+    @media (max-width: 600px) {
+      .productos {
+        grid-template-columns: 1fr;
+      }
+      .carrito {
+        width: 100%;
+      }
+    body { font-family: 'Comfortaa', sans-serif; }
+    header { background: #890620; }
     /* Botón del menú */
   .menu-btn {
   position: fixed;
@@ -146,65 +203,6 @@ document.getElementById('btn-contacto').addEventListener('click', function(e) {
       cursor: pointer;
       transition: background-color 0.3s;
     }
-
-    button:hover {
-      background-color: #6d0420;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1.5em;
-      background-color: #eee;
-      margin-top: 2em;
-    }
-
-    .cart-btn {
-      position: fixed;
-      top: 1.2em;
-      right: 1.2em;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      z-index: 9999;
-    }
-
-    .cart-btn img {
-      width: 50px;
-      height: 50px;
-    }
-
-    .carrito {
-      display: none;
-      position: fixed;
-      right: 0;
-      top: 0;
-      width: 300px;
-      height: 100vh;
-      background-color: #fff6f0;
-      box-shadow: -2px 0 10px rgba(0,0,0,0.2);
-      padding: 1em;
-      overflow-y: auto;
-      z-index: 1000;
-    }
-
-    .carrito h2 {
-      margin-top: 0;
-      color: #890620;
-    }
-
-    .carrito button {
-      margin-left: 0.5em;
-      background-color: #d94c3a;
-    }
-
-    @media (max-width: 600px) {
-      .productos {
-        grid-template-columns: 1fr;
-      }
-      .carrito {
-        width: 100%;
-      }
-    }
   </style>
 </head>
 
@@ -214,7 +212,7 @@ document.getElementById('btn-contacto').addEventListener('click', function(e) {
   <button id="menu-btn" class="menu-btn">☰</button> <!-- Quité el texto "Menú" -->
 
   <!-- Sidebar (oculto por defecto) -->
-  <nav id="sidebar" class="sidebar">
+  <nav id="sidebar" class="sidebar"> </nav>
     <ul>
       <li><a href="#" id="btn-totebags">Totebags</a></li>
       <li><a href="#" id="btn-cartucheras">Cartucheras</a></li>
@@ -294,6 +292,8 @@ document.getElementById('btn-contacto').addEventListener('click', function(e) {
   </div>
 
   <script>
+     document.getElementById('menu-btn').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.toggle('open');
   // Base de datos de productos (CORREGIDA)
   const productos = {
     totebags: [
@@ -355,84 +355,6 @@ document.getElementById('btn-contacto').addEventListener('click', function(e) {
     ]
   };
 </script>
-/* Botón del menú */
-.menu-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1001;
-  background: #890620;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-/* Sidebar: OCULTO por defecto */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: -250px; /* Lo esconde fuera de la pantalla */
-  width: 250px;
-  height: 100vh;
-  background: #890620;
-  color: white;
-  transition: left 0.3s ease; /* Animación suave */
-  z-index: 1000;
-  padding-top: 60px;
-}
-
-/* Clase para MOSTRAR el sidebar (se agrega con JavaScript) */
-.sidebar.open {
-  left: 0; /* Lo trae a la pantalla */
-}
-
-/* Estilos de los enlaces (igual que antes) */
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar li a {
-  color: white;
-  text-decoration: none;
-  display: block;
-  padding: 15px;
-  transition: background 0.3s;
-}
-
-.sidebar li a:hover {
-  background: #6d0420;
-}
-}
-    document.getElementById('menu-btn').addEventListener('click', function() {
-  document.getElementById('sidebar').classList.toggle('open');
-}):
-
-// Contenido dinámico
-document.getElementById('btn-totebags').addEventListener('click', function(e) {
-  e.preventDefault();
-  cargarProductos('totebags');
-  document.getElementById('sidebar').classList.remove('open');
-});
-    document.addEventListener('click', function(e) {
-  const sidebar = document.getElementById('sidebar');
-  const btn = document.getElementById('menu-btn');
-  if (!sidebar.contains(e.target) && e.target !== btn) {
-    sidebar.classList.remove('open');
-  }
-});
-document.getElementById('btn-cartucheras').addEventListener('click', function(e) {
-  e.preventDefault();
-  cargarProductos('cartucheras');
-  document.getElementById('sidebar').classList.remove('open');
-});
-
-document.getElementById('btn-contacto').addEventListener('click', function(e) {
-  e.preventDefault();
-  document.querySelector('.productos').innerHTML = `
     <div class="contacto-form" style="max-width: 500px; margin: 0 auto; padding: 2rem;">
       <h2>Contacto</h2>
       <form>
