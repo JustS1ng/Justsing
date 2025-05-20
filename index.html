@@ -409,6 +409,18 @@ document.getElementById('btn-contacto').addEventListener('click', function(e) {
       document.getElementById('total').textContent = `Total: $${total}`;
       document.getElementById('total-final').textContent = `Total con envío: $${total + envio}`;
     }
+    <script>
+  // Control del sidebar
+  document.getElementById('menu-btn').addEventListener('click', function() {
+    document.getElementById('sidebar').classList.toggle('open');
+  });
+
+  // Cerrar el menú al hacer clic en un enlace
+  document.querySelectorAll('#sidebar a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('sidebar').classList.remove('open');
+    });
+  });
   </script>
 </body>
 </html>
